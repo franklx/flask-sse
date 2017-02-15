@@ -6,7 +6,7 @@ from flask import Blueprint, request, current_app, json, stream_with_context
 from redis import StrictRedis
 import six
 
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 
 
 @six.python_2_unicode_compatible
@@ -155,9 +155,13 @@ class ServerSentEventsBlueprint(Blueprint):
                 yield str(message)
 
         return current_app.response_class(
-            generator(),
-            mimetype='text/event-stream',
-        )
+                generator(),
+                mimetype='text/event-stream',
+                headers={
+                    'Transfer-Encoding': 'identity',
+                    'Cache-Control': 'no-cache',
+                    'X-Accel-Buffering': 'no',
+                    })
 
 
 sse = ServerSentEventsBlueprint('sse', __name__)

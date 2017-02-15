@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+0.2.2 (2017-02-15)
+------------------
+* {franklx} reverse proxy headers
+
 0.2.1 (2016-04-15)
 ------------------
 * Packaging fix
